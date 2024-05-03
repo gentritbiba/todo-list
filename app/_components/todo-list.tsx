@@ -24,14 +24,11 @@ const sortTodos = (a: Todo, b: Todo) => {
 }
 
 
-const TodoList: React.FC = () => {
-  const [todos, setTodos] = useState<Todo[]>([]);
+export  function TodoList({ initialList }: { initialList: Todo[] }) {
+  const [todos, setTodos] = useState<Todo[]>(initialList.sort(sortTodos));
   const [newTodo, setNewTodo] = useState('');
   const [date, setDate] = useState<Date>(new Date());
 
-  useEffect(() => {
-    getTodos().then(todos => setTodos(todos.sort(sortTodos)));
-  }, []);
 
   const addTodo = () => {
     if (newTodo.trim() !== '') {
